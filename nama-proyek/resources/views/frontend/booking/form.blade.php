@@ -194,15 +194,18 @@
     <div class="container">
         <div class="header">
             <h1>Detail Pemesanan Hotel</h1>
-            <p>Lengkapi data booking dan lakukan pembayaran</p>
+            <p>Lengkapi data dan lakukan pembayaran</p>
         </div>
         
         <div class="content">
             <div class="booking-form">
                 <h2>Detail Pemesanan</h2>
+
                 
                 <form id="bookingForm">
+
                     <div class="form-group">
+                        <input type="hidden" name="kamar_id" value="{{ $kamar->id }}">
                         <label for="nama">Nama Lengkap *</label>
                         <input type="text" id="nama" name="nama" required>
                         <div class="error" id="namaError"></div>
@@ -461,14 +464,17 @@
                 const calculation = calculateTotal();
                 bookingData.duration = calculation.days;
                 bookingData.total_amount = calculation.total;
-                bookingData.room_type = 'Deluxe Room';
-                bookingData.price_per_night = 150000;
+                bookingData.price_per_night = parseFloat(@json($kamar->harga_per_malam));
+                bookingData.room_type = @json($kamar->tipe);
                 bookingData._token = getCSRFToken(); // Add CSRF token
 
+                if (!bookingData.kamar_id) {
+                    throw new Error('ID kamar tidak ditemukan!');
+                }
                 console.log('Sending booking data:', bookingData);
 
                 // Send to backend untuk create snap token
-                const response = await fetch(`${CONFIG.baseUrl}/web/create-payment`, { // Fixed endpoint
+                const response = await fetch(`${CONFIG.baseUrl}/api/create-payment`, { // Fixed endpoint
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
