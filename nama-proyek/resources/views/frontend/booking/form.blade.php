@@ -29,7 +29,7 @@
         }
         
         .header {
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            background: linear-gradient(45deg, #691F0C, #2E1D12);
             color: white;
             padding: 30px;
             text-align: center;
@@ -93,10 +93,10 @@
         }
         
         .payment-summary {
-            background: #fff5f5;
+            background: #F5F0EC;
             padding: 30px;
             border-radius: 15px;
-            border: 2px solid #fed7d7;
+            border: 2px solid #E0E0E0;
             height: fit-content;
         }
         
@@ -111,7 +111,7 @@
         .total-amount {
             font-size: 24px;
             font-weight: bold;
-            color: #e53e3e;
+            color: #691F0C;
             text-align: center;
             margin: 20px 0;
         }
@@ -119,7 +119,7 @@
         .pay-button {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(45deg, #ff6b6b, #ee5a5a);
+            background: linear-gradient(45deg, #691F0C, #2E1D12);
             color: white;
             border: none;
             border-radius: 10px;
@@ -131,10 +131,11 @@
         
         .pay-button:hover {
             transform: translateY(-2px);
+            background: linear-gradient(45deg, #2E1D12, #691F0C);
         }
         
         .pay-button:disabled {
-            background: #ccc;
+            background: #BDBDBD;
             cursor: not-allowed;
             transform: none;
         }
@@ -449,7 +450,7 @@
                 console.log('Sending booking data:', bookingData);
 
                 // Send to backend untuk create snap token
-                const response = await fetch(`${CONFIG.baseUrl}/create-payment`, { // Fixed endpoint
+                const response = await fetch(`${CONFIG.baseUrl}/web/create-payment`, { // Fixed endpoint
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -40,3 +40,5 @@ Route::get('/booking/guest-success/{orderId}', [BookingController::class, 'guest
 
 // Check payment status
 Route::post('/api/check-payment-status', [BookingController::class, 'checkPaymentStatus'])->name('check-payment-status');
+
+
