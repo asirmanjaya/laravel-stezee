@@ -99,6 +99,18 @@
             border: 2px solid #E0E0E0;
             height: fit-content;
         }
+
+        .payment-summary img {
+    width: 100%;
+    max-width: 400px;  /* Maksimal lebar gambar */
+    height: auto;      /* Tinggi mengikuti proporsi */
+    border-radius: 10px;
+    object-fit: cover; /* Supaya gambar ter-crop rapi tanpa distorsi */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: block;
+    margin: 0 auto 20px; /* Center dan beri jarak bawah */
+}
+
         
         .room-image {
             width: 100%;
@@ -246,13 +258,15 @@
             </div>
             
             <div class="payment-summary">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDQwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjZjBmMGYwIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjY2IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiPkdhbWJhciBLYW1hcjwvdGV4dD4KPC9zdmc+" alt="Room Image" class="room-image">
+            <img src="{{ $kamar->gambar ? asset('storage/' . $kamar->gambar) : 'https://via.placeholder.com/600x400?text=Gambar+Kamar' }}" 
+                alt="Gambar kamar {{ $kamar->tipe }}" 
+                class="room-image">
                 
                 <h3>Ringkasan Pemesanan</h3>
                 <div style="margin: 20px 0;">
-                    <p><strong>Kamar:</strong> Deluxe Room</p>
+                    <p><strong>Kamar:</strong> {{ $kamar->tipe }}</p>
                     <p><strong>Durasi:</strong> <span id="duration">1 malam</span></p>
-                    <p><strong>Harga per malam:</strong> Rp. 150,000</p>
+                    <p><strong>Harga per malam:</strong> Rp. {{ number_format($kamar->harga_per_malam, 0, ',', '.') }}</p>
                 </div>
                 
                 <div class="total-amount">
@@ -309,20 +323,24 @@
         function calculateTotal() {
             const checkin = new Date(checkinInput.value);
             const checkout = new Date(checkoutInput.value);
-            
+
+            // Pastikan harga per malam sebagai number, pakai parseFloat
+            const pricePerNight = parseFloat(@json($kamar->harga_per_malam));
+
             if (checkin && checkout && checkout > checkin) {
                 const diffTime = Math.abs(checkout - checkin);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                const pricePerNight = 150000;
                 const total = diffDays * pricePerNight;
-                
+
                 durationSpan.textContent = `${diffDays} malam`;
                 totalAmountSpan.textContent = total.toLocaleString('id-ID');
-                
+
                 return { days: diffDays, total: total };
             }
-            return { days: 1, total: 150000 };
+            // fallback jika tanggal belum valid, asumsikan 1 malam
+            return { days: 1, total: pricePerNight };
         }
+
 
         // Event listeners for date changes
         checkoutInput.addEventListener('change', calculateTotal);
