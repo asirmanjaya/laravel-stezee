@@ -159,7 +159,12 @@
     <div class="header-content">
         <div>
             <h2 style="font-size:28px; font-weight:bold; color:#6b1e11;">{{ $cabang->nama }}</h2>
-            <p class="alamat-cabang">{{ $cabang->alamat }}</p>
+            <!--<p class="alamat-cabang">{{ $cabang->alamat }}</p>-->
+            <p class="alamat-cabang">
+                <a href="{{ $cabang->link_maps }}" target="_blank" style="color: #6b1e11; text-decoration: underline;">
+                    {{ $cabang->alamat }}
+                </a>
+            </p>
         </div>
         <div class="harga-box">
             <!--<p class="harga-awal">Mulai dari</p>
