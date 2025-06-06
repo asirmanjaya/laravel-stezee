@@ -218,7 +218,7 @@
 
     <footer id="footer" class="footer"> <!-- Diberi ID untuk scroll -->
         <div class="footer-left">
-            <img src="images/logo.png" alt="STeZe Logo">
+            <img src="{{ asset('images/logo.png') }}" alt="STeZe Logo">
             <p><strong>Penginapan STeZe</strong> hadir untuk memberikan kenyamanan terbaik di berbagai lokasi strategis. Nikmati pengalaman menginap yang modern, bersih, dan ramah dompet.</p>
         </div>
 
