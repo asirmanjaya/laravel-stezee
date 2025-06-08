@@ -79,6 +79,7 @@
             height: auto;
         }
     }
+    
 </style>
 
 <div class="kamar-section">

@@ -146,6 +146,11 @@
         .gambar-utama-wrapper img {
             height: auto;
         }
+
+        .btn-pilih.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
     }
 </style>
 
@@ -184,7 +189,13 @@
                     <div class="harga-kamar">Rp{{ number_format($kamar->harga_per_malam) }} /malam</div>
                     <p class="stok-kamar">Tersisa {{ $kamar->stok }} kamar</p>
                     <div class="kamar-footer">
-                        <a href="{{ route('kamar.show', $kamar->id) }}" class="btn-pilih">Pilih Kamar</a>
+                        @if($kamar->stok > 0)
+                            <a href="{{ route('kamar.show', $kamar->id) }}" class="btn-pilih">Pilih Kamar</a>
+                        @else
+                            <button class="btn-pilih disabled" disabled style="background-color: #ccc; cursor: not-allowed;">
+                                Kamar Penuh
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>

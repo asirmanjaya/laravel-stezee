@@ -52,24 +52,26 @@ class BookingController extends Controller
                 'total_amount' => 'required|numeric|min:1',
                 'duration' => 'required|integer|min:1',
                 'price_per_night' => 'required|numeric|min:1',
+                'kamar_id' => 'required|exists:kamars,id',
             ]);
 
             $orderId = 'BOOKING-' . time() . '-' . rand(1000, 9999);
 
             $booking = Pemesanan::create([
                 'kode_booking' => 'GUEST-' . strtoupper(Str::random(10)),
-                'kamar_id' => null,
+                    'kamar_id' => $validated['kamar_id'],  // langsung pakai kamar_id dari form
                 'nomor_kamar' => null,
                 'user_id' => null,
                 'nama_pemesan' => $validated['nama'],
+                'tanggal_lahir' => $validated['tanggal_lahir'],
                 'tanggal_checkin' => $validated['checkin'],
                 'tanggal_checkout' => $validated['checkout'],
                 'jumlah_tamu' => 1,
                 'nomor_hp' => $validated['phone'],
                 'email' => $validated['email'],
                 'jenis_kelamin' => $validated['gender'],
-                'sumber' => 'Website Guest',
-                'status' => 'Menunggu Pembayaran',
+                'sumber' => 'Online',
+                'status' => 'belum_bayar',
                 'total_harga' => $validated['total_amount'],
                 'order_id' => $orderId,
             ]);
