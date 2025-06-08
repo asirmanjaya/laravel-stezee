@@ -32,13 +32,10 @@ Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.s
 // Route untuk Midtrans notification (PENTING!)
 Route::post('/midtrans/notification', [BookingController::class, 'midtransNotification'])->name('midtrans.notification');
 
-// ✅ FIXED: Add proper route name for create-payment
-Route::post('/api/create-payment', [BookingController::class, 'createPayment'])->name('create-payment');
 
 // Guest success page
 Route::get('/booking/guest-success/{orderId}', [BookingController::class, 'guestSuccess'])->name('booking.guest-success');
 
-// Check payment status
-Route::post('/api/check-payment-status', [BookingController::class, 'checkPaymentStatus'])->name('check-payment-status');
+
 
 

@@ -187,8 +187,8 @@
             }
         }
     </style>
-    <!-- Midtrans Snap JS -->
-    <script src="https://app.midtrans.com/snap/snap.js" data-client-key="YOUR_CLIENT_KEY_HERE"></script>
+<!-- Midtrans Snap JS -->
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-uP2xW3VDkzj6fJWx"></script>
 </head>
 <body>
     <div class="container">
@@ -292,7 +292,7 @@
         // Configuration
         const CONFIG = {
             baseUrl: 'http://127.0.0.1:8000', // Ganti dengan URL backend Anda
-            snapClientKey: 'YOUR_CLIENT_KEY_HERE' // Ganti dengan client key Midtrans Anda
+            snapClientKey: 'SB-Mid-client-uP2xW3VDkzj6fJWx' // Ganti dengan client key Midtrans Anda
         };
 
         // Form elements
@@ -537,6 +537,4 @@
     </script>
 </body>
 </html>
-
-
 
